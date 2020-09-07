@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quiz-sb
+spec:
+  selector:
+    matchLabels:
+      app: quiz-sb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: quiz-sb
+    spec:
+      containers:
+      - name: quiz-sb
+        image: quiz-sb:0.1
+        ports:
+        - containerPort: 8905
+---
+# https://kubernetes.io/docs/concepts/s...  
+kind: Service
+apiVersion: v1
+metadata:
+  name: quiz-sb-service
+spec:
+  type: NodePort
+  selector:
+    app: quiz-sb
+  ports:
+  - protocol: TCP
+    port: 8905
+    targetPort: 8905
+    nodePort: 30047
+  
