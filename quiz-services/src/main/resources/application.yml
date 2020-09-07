@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: Quiz-Services
+  banner:
+    location: "classpath:banner.txt"
+  profiles: dev
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+  datasource:
+    platform: mariadb
+    url: jdbc:mariadb://localhost:3306/quizomania
+    username: root
+    password: root
+    driver-class-name: org.mariadb.jdbc.Driver
+    timeBetweenEvictionRunsMillis: 1000
+    testWhileIdle: true
+    validationQuery: SELECT 1
+
+server:
+  port : 8905
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: '${EUREKA_URI:http://localhost:8761/eureka}'
+  instance:
+    preferIpAddress: true
+
+logging:
+  config: "classpath:logback-spring.xml"
+  file:
+    name: /QUIZOMANIA/logs/quiz.log
+    max-size: 50MB
+    max-history: 5
+  pattern:
+    console: "%clr(%d %-5level %logger : %msg%n)"
+    file: "%clr(%d %-5level [%thread] %logger : %msg%n)"
+  level:
+    org.springframework.web: ERROR
+    io.roost: DEBUG
+    org.hibernate: ERROR
