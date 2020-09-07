@@ -1,0 +1,36 @@
+<div class="container-fluid mt10">
+	<div class="bg-clr-aliceblue">
+		<div ng-click=goBackToList() class="col-sm-1 cur-ptr pad5">
+			<i class="fa fa-arrow-left fs24"></i> Back To List
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 form-group">
+			<label class="col-sm-12 control-label"><strong>Quiz
+					Name:</strong> {{quiz.name}}</label>
+		</div>
+		<div class="col-sm-4 form-group pad0">
+			<label class="col-sm-12 control-label"><strong>Quiz
+					Creator:</strong> {{quiz.email}}</label>
+		</div>
+		<div class="col-sm-4 form-group">
+			<label class="col-sm-21 control-label"><strong>Quiz
+					Category:</strong> {{quiz.category}}</label>
+		</div>
+	</div>
+	<table ng-if="answers.length > 0" class="table table-striped">
+		<thead>
+			<tr>
+				<th>Email</th>
+				<th>Score</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="answer in answers"
+				ng-click="showQuizzerAnswer(quiz.id, answer.id)">
+				<td>{{answer.email}}</td>
+				<td>{{answer.score}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

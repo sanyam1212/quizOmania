@@ -1,0 +1,33 @@
+<div class="container-fluid mt10">
+	<div class="bg-clr-aliceblue">
+		<div ng-click=addQuiz() class="col-sm-2 cur-ptr pad5">
+			<i class="fa fa-plus fs24"></i> Add New Quiz
+		</div>
+	</div>
+	<div
+		ng-if="quizes == undefined || quizes == null || quizes.length == 0"
+		class="mt-100 text-center">
+		Looks like you have not added any quiz. <span ng-click="addQuiz()"
+			class="cur-ptr">ADD NEW QUIZ</span>
+	</div>
+
+
+	<table ng-if="quizes.length > 0" class="table table-striped">
+    	<thead>
+	      <tr>
+	        <th>Name</th>
+	        <th>Email</th>
+	        <th>Category</th>
+	        <th>Actions</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr ng-repeat="quiz in quizes" ng-click="showQuizzersList(quiz.id)">
+	        <td>{{quiz.name}}</td>
+	        <td>{{quiz.email}}</td>
+	        <td>{{quiz.category}}</td>
+	        <td><button class="btn btn-primary" ng-click="attempt(quiz.id)">Attempt</button> <button class="btn btn-primary" ng-click="quizzersList(quiz.id)">Quizzers List</button></td>
+	      </tr>
+	    </tbody>
+	  </table>
+</div>

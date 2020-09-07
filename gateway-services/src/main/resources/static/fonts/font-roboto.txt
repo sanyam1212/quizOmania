@@ -1,0 +1,37 @@
+Font ROBOTO
+
+Thin 100
+Thin 100 Italic
+Light 300
+Normal 400
+Medium 500
+Bold 700
+Ultra-Bold 900
+
+
+
+.user-icon
+
+.team-pane:nth-child(even) {
+	background-color: #fafafa;
+}
+.team-pane:nth-child(odd) {
+	background-color: #fff;
+}
+
+
+
+<span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+
+
+magenta - #b63e93
+
+green - #52b63e
+
+purple - #663eb6
+
+Orange- #eb952f
+
+cyan - #3e9eb6

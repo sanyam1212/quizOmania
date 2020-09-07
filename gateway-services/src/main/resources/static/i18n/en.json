@@ -1,0 +1,18 @@
+{
+	"error": {
+		"emailPasswordWrong": "Either Email or Password or User Type was incorrectly entered. Please try again.",
+		"errorInAddingProduct": "An error was encountered while adding product. Please try again.",
+		"errorInUpdatingProduct": "An error was encountered while updating product. Please try again.",
+		"errorInDeletingProduct": "An error was encountered while deleting product. Please try again."
+	},
+	"action" : {
+		"cancel" : "Cancel",
+		"delete" : "Delete",
+		"add" :"Add",
+	 	"ok" : "OK",
+	 	"saveMsg" : "Save Message",
+	 	"archive" : "Archive",
+	 	"action" : "Action",
+	 	"close" : "Close"
+ 	}
+}

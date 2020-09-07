@@ -1,0 +1,159 @@
+table.scroll {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0px !important;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	display: block;
+	box-sizing: border-box;
+}
+
+table.scroll * {
+	box-sizing: border-box;
+}
+
+.table-striped>tbody>tr:hover {
+	background-color: #F5A622 !important;
+	cursor : pointer;
+}
+
+table.scroll td, table.scroll th {
+	padding: 6px;
+	text-align: left;
+	display: table-cell;
+	color: #333;
+}
+
+table.scroll tbody tr {
+	border-bottom: 1px solid #ccc;
+	display: block;
+}
+
+table.scroll tbody tr:last-child {
+	border-bottom: 0;
+}
+
+table.scroll thead tr {
+	display: block;
+}
+
+table.scroll tbody, table.scroll thead {
+	display: block;
+}
+
+table.scroll tbody {
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+table.scroll tbody td:last-child, table.scroll thead th:last-child {
+	border-right: none;
+}
+
+table.scroll tbody tr:hover {
+	background-color: #ffff99;
+	color: #000000;
+}
+
+@media ( min-width :769px) {
+	table.scroll td, table.scroll th {
+		max-width: 30px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	/*table.scroll tbody {
+		max-height: 400px;
+	}*/
+	table.scroll tbody {
+		border-top: 1px solid #ccc;
+	}
+	table.scroll tbody td, table.scroll thead th {
+		/*border-right: 1px solid #ccc;*/
+		min-width: 30px;
+	}
+	table.scroll thead tr {
+		display: block;
+	}
+	table.scroll th:nth-of-type(1), table.scroll td:nth-of-type(1) {
+		width: 2.4%;
+	}
+	table.scroll th:nth-of-type(2), table.scroll td:nth-of-type(2) {
+		width: 15%;
+	}
+	table.scroll th:nth-of-type(3), table.scroll td:nth-of-type(3) {
+		width: 15%;
+	}
+	table.scroll th:nth-of-type(4), table.scroll td:nth-of-type(4) {
+		width: 10%;
+	}
+	table.scroll th:nth-of-type(5), table.scroll td:nth-of-type(5) {
+		width: 20%;
+	}
+	table.scroll th:nth-of-type(6), table.scroll td:nth-of-type(6) {
+		width: 20%;
+	}
+	table.scroll th:nth-of-type(7), table.scroll td:nth-of-type(7) {
+		width: 15%;
+	}
+}
+
+@media ( max-width : 768px) , ( min-device-width : 768px) and
+	(max-device-width: 1024px) {
+	table.scroll {
+		border-bottom: 0;
+	}
+	table.scroll, table.scroll thead, table.scroll tbody, table.scroll th,
+		table.scroll td, table.scroll tr {
+		display: block;
+	}
+	table.scroll thead tr th {
+		display: none;
+	}
+	table.scroll thead tr th:first-child {
+		padding-left: 10px;
+		display: block;
+	}
+	table.scroll td {
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+	}
+	table.scroll td:first-child {
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 10px;
+		background-color: #eee;
+	}
+	table.scroll td:before {
+		position: absolute;
+		top: 6px;
+		left: 10px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+	}
+	table.scroll td:nth-of-type(2):before {
+		content: "First Name";
+	}
+	table.scroll td:nth-of-type(3):before {
+		content: "Last Name";
+	}
+	table.scroll td:nth-of-type(4):before {
+		content: "Phone";
+	}
+	table.scroll td:nth-of-type(5):before {
+		content: "Email";
+	}
+	table.scroll td:nth-of-type(6):before {
+		content: "Organisation";
+	}
+	table.scroll td:nth-of-type(7):before {
+		content: "Status";
+	}
+}
+
+@media ( max-width :991px) {
+}

@@ -1,0 +1,68 @@
+<div class="container-fluid mt10">
+	<div class="bg-clr-aliceblue">
+		<div ng-click=goBackToList() class="col-sm-1 cur-ptr pad5">
+			<i class="fa fa-arrow-left fs24"></i> Back To List
+		</div>
+	</div>
+</div>
+<div class="container mt-10">
+	<form class="form-horizontal">
+		<div class="row">
+			<div class="col-sm-4 form-group">
+				<label class="col-sm-12 control-label"><strong>Quiz Name:</strong> {{quiz.name}}</label>
+			</div>
+			<div class="col-sm-4 form-group pad0">
+				<label class="col-sm-12 control-label"><strong>Quiz Creator:</strong> {{quiz.email}}</label>
+			</div>
+			<div class="col-sm-4 form-group">
+				<label class="col-sm-21 control-label"><strong>Quiz Category:</strong> {{quiz.category}}</label>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-4 form-group pad0">
+				<label for="email" class="col-sm-12 control-label">Quizzer Email</label>
+				<div class="col-sm-12">
+					<input ng-model="answer.email" type="email" class="form-control"
+						id="email" placeholder="Quizzer Email">
+				</div>
+
+				<div class="padlr15">
+					<div class="bg-danger alert col-sm-12 mt10"
+						ng-if="isSaveClicked && !answer.email">Quizzer Email is
+						required.</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12 mt10 bdr-top" ng-repeat="question in questions track by $index">
+				<div class="col-sm-12 form-group pad0 pull-left mt10">
+					<label for="question" class="col-sm-6 control-label">Q: {{question.question}}</label>
+				</div>
+				<div class="clearfix"></div>
+				<div class="form-group marlr15">
+					<ol>
+						<li class="col-sm-12 form-group" ng-repeat="option in question.options track by $index">
+							<div ng-if="question.category == 'Single Select'">
+								<input type="radio" value="{{option}}" name="question-{{question.showOrder}}"> {{option}}
+							</div>
+							<div ng-if="question.category == 'Multiple Select'">
+								<input type="checkbox" name="question-{{question.showOrder}}"> {{option}}
+							</div>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<button ng-click="submitQuiz()" type="submit"
+					class="btn btn-primary btn-lg btn-block">
+					Submit Quiz
+				</button>
+			</div>
+		</div>
+	</form>
+</div>

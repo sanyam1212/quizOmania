@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: Gateway-Services
+  banner:
+    location: "classpath:banner.txt"
+  profiles: dev
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    url: "jdbc:mysql://localhost:3306/quizomania"
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    testWhileIdle: true
+
+server:
+  port : 8900
+
+logging:
+  config: "classpath:logback-spring.xml"
+  file:
+    name: /QUIZOMANIA/logs/ui.log
+    max-size: 50MB
+    max-history: 5
+  pattern:
+    console: "%clr(%d %-5level %logger : %msg%n)"
+    file: "%clr(%d %-5level [%thread] %logger : %msg%n)"
+  level:
+    org.springframework.web: ERROR
+    io.roost: DEBUG
+    org.hibernate: ERROR
