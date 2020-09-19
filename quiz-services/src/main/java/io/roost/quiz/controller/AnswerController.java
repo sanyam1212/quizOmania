@@ -28,7 +28,9 @@ public class AnswerController extends AbstractController<AnswerDTO, AnswerFilter
 
 	@Override
 	protected Response save(AbstractRequestTracker requestTracker, AnswerDTO dto) throws CommonException {
-		return onSuccess(answerService.save(requestTracker, dto));
+		AnswerDTO answerDTO = answerService.save(requestTracker, dto);
+		answerDTO.setId(null);
+		return onSuccess(answerDTO);
 	}
 
 	@Override

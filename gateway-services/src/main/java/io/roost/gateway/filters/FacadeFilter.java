@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import io.roost.gateway.discoverymanager.DiscoveryManager;
 
 @Component
-@Order(3)
+@Order(2)
 public class FacadeFilter implements Filter {
 
 	@Autowired

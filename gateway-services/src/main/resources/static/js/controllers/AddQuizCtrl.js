@@ -27,6 +27,8 @@ app.controller("AddQuizCtrl", [ '$scope', '$rootScope', '$state', '$stateParams'
 		if (GlobalMethodService.isBlank($scope.quiz.name)
 			|| GlobalMethodService.isBlank($scope.quiz.email)
 			|| GlobalMethodService.isBlank($scope.quiz.category)
+			|| GlobalMethodService.isBlank($scope.quiz.quizPassword)
+			|| GlobalMethodService.isBlank($scope.quiz.quizzerPassword)
 			|| $scope.questions.length == 0) {
 			$rootScope.showLoadingDiv=false;
 			$rootScope.forceLoadDivToContinueDisplay=false;
@@ -38,12 +40,10 @@ app.controller("AddQuizCtrl", [ '$scope', '$rootScope', '$state', '$stateParams'
 				return;
 			}
 			for(var j = 0; j < $scope.questions[i].options.length; j++) {
-				console.log($scope.questions[i].options);
 				var radioValue = $("input[name='question-"+$scope.questions[i].showOrder+"']:checked").val();
 	            if(radioValue){
 	            	$scope.questions[i].isAnswerSelected = true;
 	            	$scope.questions[i].answers.push(radioValue);
-	                console.log("radioValue" + radioValue);
 	            	break;
 	            }
 			}
@@ -55,17 +55,13 @@ app.controller("AddQuizCtrl", [ '$scope', '$rootScope', '$state', '$stateParams'
 		if(!isAllAnswersSelected) {
 			return;
 		}
-		console.log("Final Quiz ===>>> ", $scope.quiz)
-		console.log("Final Questions ===>>>  ", $scope.questions)
 		QuizService.addQuiz($scope.quiz, function(response) {
 			if (response.data != undefined && response.data != null && response.data != '' ) {
-				console.log("quiz save data ===>>> ", response.data)
 				for (var i = $scope.questions.length - 1; i >= 0; i--) {
 					$scope.questions[i].quizId = response.data.id;
 				}
 				QuestionService.addQuestions($scope.questions, function(resp) {
 					if (resp.data != undefined && resp.data != null && resp.data != '' ) {
-						console.log("question save data ===>>> ", resp.data)
 						var messages = [{
 							"type" : 'success',
 							"string" : 'Quiz Added Successfully.'
@@ -95,18 +91,20 @@ app.controller("AddQuizCtrl", [ '$scope', '$rootScope', '$state', '$stateParams'
 	$scope.addOption = function(index) {
 		$scope.isSaveClicked = false;
 		if (!GlobalMethodService.isBlank($scope.questions[index].option)) {
-			console.log("index ===>>> ", index)
-			console.log("($scope.option ===>>> ", $scope.questions[index].option)
 			$scope.questions[index].options.push(angular.copy($scope.questions[index].option));
 			$scope.questions[index].option = '';
-			console.log("$scope.questions[index] ===>>> ", $scope.questions[index])
+		}
+	}
+	
+	$scope.deleteQuestion = function(index) {
+		$scope.questions.splice(index, 1);
+		for(var i = 2; i < $scope.questions.length; i++) {
+			$scope.questions[i].showOrder = $scope.questions[i].showOrder - 1;
 		}
 	}
 	
 	$scope.deleteOption = function(questionOrder, optionIndex) {
 		$scope.isSaveClicked = false;
-		console.log("questionOrder ===>>> ", questionOrder)
-		console.log("optionIndex ===>>> ", optionIndex)
 		$scope.questions[questionOrder].options.splice(optionIndex, 1);
 	}
 

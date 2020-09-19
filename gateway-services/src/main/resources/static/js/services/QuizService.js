@@ -22,6 +22,18 @@ app.factory('QuizService', function($resource) {
 			method : 'GET',
 			params : {},
 			isArray : false
+		},
+		authenticateQuizzer : {
+			url : '/service/quiz/authenticateQuizzer/:id',
+			method : 'POST',
+			params : {},
+			isArray : false
+		},
+		authenticateQuizMaster : {
+			url : '/service/quiz/authenticateQuizMaster/:id',
+			method : 'POST',
+			params : {},
+			isArray : false
 		}
 	});
 });

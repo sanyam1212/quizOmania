@@ -8,6 +8,7 @@ import org.springframework.boot.common.dto.AbstractAuditDTO;
 public class AnswerDTO extends AbstractAuditDTO {
 	private String email;
 	private String quizId;
+	private String quizName;
 	private Map<String, List<String>> answers;
 	private String score;
 
@@ -25,6 +26,14 @@ public class AnswerDTO extends AbstractAuditDTO {
 
 	public void setQuizId(String quizId) {
 		this.quizId = quizId;
+	}
+
+	public String getQuizName() {
+		return quizName;
+	}
+
+	public void setQuizName(String quizName) {
+		this.quizName = quizName;
 	}
 
 	public Map<String, List<String>> getAnswers() {

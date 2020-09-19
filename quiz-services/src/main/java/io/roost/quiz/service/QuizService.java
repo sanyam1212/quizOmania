@@ -71,4 +71,24 @@ public interface QuizService {
 	 */
 	Integer deleteById(AbstractRequestTracker requestTracker, String id) throws CommonException;
 
+	/**
+	 * This method is used to authenticate the quizzer.
+	 * 
+	 * @param id
+	 * @param dto
+	 * @return
+	 * @throws CommonException
+	 */
+	boolean authenticateQuizzer(String id, QuizDTO dto) throws CommonException;
+	
+	/**
+	 * This method is used to authenticate the quiz master.
+	 * 
+	 * @param id
+	 * @param dto
+	 * @return
+	 * @throws CommonException
+	 */
+	boolean authenticateQuizMaster(String id, QuizDTO dto) throws CommonException;
+
 }

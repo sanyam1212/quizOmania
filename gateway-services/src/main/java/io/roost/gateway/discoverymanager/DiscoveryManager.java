@@ -59,6 +59,7 @@ public class DiscoveryManager {
 		int endPos = path.indexOf("/", 1);
 		String moduleName = endPos > 0 ? path.substring(1, endPos) : path.substring(1);
 		try {
+			serviceUrl();
 			registry.get(moduleName).get(0).toString();
 		} catch (Exception e) {
 			serviceUrl();

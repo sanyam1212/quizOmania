@@ -14,6 +14,7 @@ import org.springframework.boot.common.response.dto.Pagination;
 import org.springframework.boot.common.response.dto.Paging;
 import org.springframework.boot.common.sort.dto.SortRules;
 import org.springframework.boot.common.utils.CommonUtils;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,9 +33,12 @@ import io.roost.quiz.model.Quiz;
 public class QuizServiceImpl implements QuizService {
 	private QuizDAO quizDAO;
 
+	private EmailSenderService emailSenderService;
+
 	@Autowired
 	public QuizServiceImpl(QuizDAO quizDAO) {
 		this.quizDAO = quizDAO;
+		this.emailSenderService = new EmailSenderServiceImpl();
 	}
 
 	@Override
@@ -42,7 +46,17 @@ public class QuizServiceImpl implements QuizService {
 		dto.setId(CommonUtils.getUUID());
 		dto.setCreatedOn(new Date().getTime());
 		dto.setModifiedOn(dto.getCreatedOn());
-		return getDTOForEntity(quizDAO.save(getEntityForDTO(dto)));
+		Quiz quiz = quizDAO.save(getEntityForDTO(dto));
+		try {
+			if (quiz != null) {
+				emailSenderService.sendQuizCreationEmail(dto.getEmail(), dto.getName(), dto.getQuizPassword(),
+						dto.getQuizzerPassword(),
+						new StringBuilder("http://roost-controlplane:30057/#/quiz/quizzers/").append(dto.getId()).toString());
+			}
+		} catch (CommonException e) {
+			e.printStackTrace();
+		}
+		return getDTOForEntity(quiz);
 	}
 
 	@Override
@@ -94,6 +108,14 @@ public class QuizServiceImpl implements QuizService {
 		return dto;
 	}
 
+	private static String encrypt(String value) {
+		return BCrypt.hashpw(value, BCrypt.gensalt());
+	}
+
+	private static boolean validate(String plaintext, String hashed) {
+		return BCrypt.checkpw(plaintext, hashed);
+	}
+
 	private Quiz getEntityForDTO(QuizDTO dto) {
 		Quiz model = new Quiz();
 		model.setId(dto.getId());
@@ -102,6 +124,8 @@ public class QuizServiceImpl implements QuizService {
 		model.setName(dto.getName());
 		model.setEmail(dto.getEmail());
 		model.setCategory(dto.getCategory());
+		model.setQuizPassword(encrypt(dto.getQuizPassword()));
+		model.setQuizzerPassword(encrypt(dto.getQuizzerPassword()));
 		return model;
 	}
 
@@ -138,6 +162,22 @@ public class QuizServiceImpl implements QuizService {
 			}
 		}
 		return (int) quizDAO.count();
+	}
+
+	@Override
+	public boolean authenticateQuizzer(String id, QuizDTO dto) throws CommonException {
+		if (StringUtils.isNotBlank(id) && StringUtils.isNotBlank(dto.getQuizzerPassword())) {
+			return validate(dto.getQuizzerPassword(), quizDAO.findById(id).get().getQuizzerPassword());
+		}
+		return false;
+	}
+
+	@Override
+	public boolean authenticateQuizMaster(String id, QuizDTO dto) throws CommonException {
+		if (StringUtils.isNotBlank(id) && StringUtils.isNotBlank(dto.getQuizPassword())) {
+			return validate(dto.getQuizPassword(), quizDAO.findById(id).get().getQuizPassword());
+		}
+		return false;
 	}
 
 }

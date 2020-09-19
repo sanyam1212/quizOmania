@@ -4,6 +4,36 @@
 			<i class="fa fa-arrow-left fs24"></i> Back To List
 		</div>
 	</div>
+	
+</div>
+<div class="container mt-10" ng-if="!isShowQuizzersList">
+		<div class="row">
+			<div class="col-sm-4 form-group"></div>
+			<div class="col-sm-4 form-group">
+				<label for="password" class="col-sm-12 control-label">Enter Password</label>
+				<div class="col-sm-12">
+					<input ng-model="login.password" type="password" class="form-control"
+						id="password" placeholder="Enter Password">
+				</div>
+
+				<div class="padlr15">
+					<div class="bg-danger alert col-sm-12 mt10"
+						ng-if="isShowQuizzersListClicked && !login.password">Password is
+						required.</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<button ng-click="showQuizzersList()" type="submit"
+					class="btn btn-primary btn-lg btn-block">
+					Show Quizzers List
+				</button>
+			</div>
+		</div>
+</div>
+<div class="container mt10" ng-if="isShowQuizzersList">
 	<div class="row">
 		<div class="col-sm-4 form-group">
 			<label class="col-sm-12 control-label"><strong>Quiz

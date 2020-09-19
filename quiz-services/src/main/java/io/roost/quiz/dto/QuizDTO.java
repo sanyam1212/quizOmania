@@ -6,6 +6,8 @@ public class QuizDTO extends AbstractAuditDTO {
 	private String name;
 	private String email;
 	private String category;
+	private String quizPassword;
+	private String quizzerPassword;
 
 	public String getName() {
 		return name;
@@ -29,6 +31,22 @@ public class QuizDTO extends AbstractAuditDTO {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getQuizPassword() {
+		return quizPassword;
+	}
+
+	public void setQuizPassword(String quizPassword) {
+		this.quizPassword = quizPassword;
+	}
+
+	public String getQuizzerPassword() {
+		return quizzerPassword;
+	}
+
+	public void setQuizzerPassword(String quizzerPassword) {
+		this.quizzerPassword = quizzerPassword;
 	}
 
 }

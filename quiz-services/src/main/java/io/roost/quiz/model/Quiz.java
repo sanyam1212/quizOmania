@@ -18,6 +18,8 @@ public class Quiz extends AbstractAuditModel {
 	private String name;
 	private String email;
 	private String category;
+	private String quizPassword;
+	private String quizzerPassword;
 
 	public String getId() {
 		return id;
@@ -52,6 +54,24 @@ public class Quiz extends AbstractAuditModel {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	@Column(name = "quiz_password")
+	public String getQuizPassword() {
+		return quizPassword;
+	}
+
+	public void setQuizPassword(String quizPassword) {
+		this.quizPassword = quizPassword;
+	}
+
+	@Column(name = "quizzer_password")
+	public String getQuizzerPassword() {
+		return quizzerPassword;
+	}
+
+	public void setQuizzerPassword(String quizzerPassword) {
+		this.quizzerPassword = quizzerPassword;
 	}
 	
 }

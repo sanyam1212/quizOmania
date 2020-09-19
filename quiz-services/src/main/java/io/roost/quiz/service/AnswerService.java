@@ -1,5 +1,7 @@
 package io.roost.quiz.service;
 
+import java.util.Map;
+
 import org.springframework.boot.common.exception.CommonException;
 import org.springframework.boot.common.request.tracker.AbstractRequestTracker;
 import org.springframework.boot.common.response.dto.PagedList;
@@ -16,6 +18,6 @@ public interface AnswerService {
 	PagedList<AnswerDTO> list(AbstractRequestTracker requestTracker, AnswerFilter filter, Paging paging,
 			SortRules sortRules) throws CommonException;
 
-	AnswerDTO findById(String id) throws CommonException;
+	Map<String, Object> findById(String id) throws CommonException;
 
 }
